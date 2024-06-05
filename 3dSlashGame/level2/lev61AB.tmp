@@ -29,8 +29,7 @@ albedo_color = Color(0.158477, 0.286072, 0.127753, 1)
 
 [node name="player" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-axis_lock_angular_x = true
-axis_lock_angular_z = true
+mass = 10.0
 script = ExtResource("1_msg50")
 
 [node name="body" type="MeshInstance3D" parent="player"]

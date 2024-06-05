@@ -21,6 +21,9 @@ func _ready():
 		print("Camera3D not found. Please check the node path.")
 	if sword_control == null:
 		print("swordControl not found. Please check the node path.")
+	
+	# Set a high angular damping to stabilize rotation
+	angular_damp = 10.0
 
 func _integrate_forces(state):
 	handle_movement(state)
@@ -78,18 +81,46 @@ func face_mouse(state):
 
 	if not intersection.is_empty():
 		var pos = intersection.position
-		var target_direction = (pos - global_transform.origin).normalized()
+		var look_at_me = Vector3(pos.x, global_transform.origin.y, pos.z)
 		
-		var target_rotation = global_transform.basis.get_rotation_quaternion().slerp(Quaternion(target_direction, Vector3.UP), rotation_acceleration * state.step)
+		# Calculate the direction to look at
+		var target_direction = (look_at_me - global_transform.origin).normalized()
 		
-		var current_rotation = global_transform.basis.get_rotation_quaternion()
-		var delta_rotation = target_rotation * current_rotation.inverse()
+		# Calculate the current direction
+		var current_direction = -global_transform.basis.z
 		
-		var angle = delta_rotation.get_euler().y
-		var clamped_angle = clamp(angle, -max_angular_speed * state.step, max_angular_speed * state.step)
+		# Calculate the angle between the directions
+		var angle_to_target = current_direction.angle_to(target_direction)
+		var cross_product = current_direction.cross(target_direction).y
 		
-		var torque = Vector3(0, clamped_angle, 0) * rotation_acceleration
-		apply_torque_impulse(torque)
+		# Determine the sign of the angle
+		var angle_sign = sign(cross_product)
+		
+		print("Current Direction:", current_direction)
+		print("Target Direction:", target_direction)
+		print("Angle to Target:", angle_to_target)
+		print("Cross Product:", cross_product)
+		
+		# Clamp the angle to the maximum angular speed
+		var clamped_angle = clamp(angle_to_target, 0, max_angular_speed * state.step)
+		var applied_angle = clamped_angle * angle_sign
+		
+		print("Clamped Angle:", clamped_angle)
+		print("Applied Angle:", applied_angle)
+		
+		# Apply torque to rotate
+		if abs(angle_to_target) > 0.01:
+			var torque = Vector3(0, applied_angle, 0) * rotation_acceleration
+			apply_torque_impulse(torque)
+			print("Applying Torque:", torque)
+		else:
+			print("No significant angle to correct")
+
+	# Constrain the rotation to keep the player upright
+	var angular_velocity = state.angular_velocity
+	angular_velocity.x = 0
+	angular_velocity.z = 0
+	state.angular_velocity = angular_velocity
 
 # Smooth camera follow (optional)
 func _process(delta):

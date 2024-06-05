@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://bq8je3y5t1u6t"]
+
+[ext_resource type="Script" path="res://level2/player.gd" id="1_msg50"]
+[ext_resource type="Script" path="res://level1/swordControl.gd" id="2_52j6o"]
+[ext_resource type="PackedScene" uid="uid://db7etx2x7u6q3" path="res://level1/sword.tscn" id="3_ndwip"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_r077f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3y8m"]
+albedo_color = Color(0.698039, 0.556863, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_faglt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylnbm"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_grro2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4dbgl"]
+size = Vector3(22, 1, 22)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1qnyk"]
+size = Vector3(22, 1, 22)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwntp"]
+albedo_color = Color(0.158477, 0.286072, 0.127753, 1)
+
+[node name="level2" type="Node3D"]
+
+[node name="player" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mass = 10.0
+script = ExtResource("1_msg50")
+
+[node name="body" type="MeshInstance3D" parent="player"]
+mesh = SubResource("CapsuleMesh_r077f")
+surface_material_override/0 = SubResource("StandardMaterial3D_g3y8m")
+
+[node name="eyes" type="MeshInstance3D" parent="player/body"]
+transform = Transform3D(0.648, 0, 0, 0, 0.3, 0, 0, 0, 0.2, 0, 0.3, -0.4)
+mesh = SubResource("BoxMesh_faglt")
+surface_material_override/0 = SubResource("StandardMaterial3D_ylnbm")
+
+[node name="swordControl" type="Node3D" parent="player"]
+script = ExtResource("2_52j6o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
+shape = SubResource("CapsuleShape3D_grro2")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="player"]
+node_a = NodePath("..")
+node_b = NodePath("../sword")
+
+[node name="sword" parent="player" instance=ExtResource("3_ndwip")]
+transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, 0.7, -0.1, -0.6)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 9, 7)
+
+[node name="ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.00577247)
+axis_lock_linear_y = true
+axis_lock_angular_y = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+shape = SubResource("BoxShape3D_4dbgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground"]
+mesh = SubResource("BoxMesh_1qnyk")
+surface_material_override/0 = SubResource("StandardMaterial3D_bwntp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 14, 12)

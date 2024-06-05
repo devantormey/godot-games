@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmyjah8vgwigv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_oj3fd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62ux1"]
+albedo_color = Color(0.572097, 0.575603, 0.599527, 1)
+metallic = 0.22
+metallic_specular = 0.43
+
+[node name="gun" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.731724, 0, 0, 0, 0.207635, 0, 0, 0, 0.19546, 0, 0, 0)
+mesh = SubResource("BoxMesh_oj3fd")
+surface_material_override/0 = SubResource("StandardMaterial3D_62ux1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.173755, 0.1765, 0, -0.0874241, 0.350795, 0, 0, 0, 0.120261, -0.27329, -0.130898, 0)
+mesh = SubResource("BoxMesh_oj3fd")
+surface_material_override/0 = SubResource("StandardMaterial3D_62ux1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.20459, -0.010204, 0, 0.00623291, 0.334937, 0, 0, 0, 0.0734463, 0.186317, -0.130898, 0)
+mesh = SubResource("BoxMesh_oj3fd")
+surface_material_override/0 = SubResource("StandardMaterial3D_62ux1")

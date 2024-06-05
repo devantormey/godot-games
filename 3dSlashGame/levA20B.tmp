@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://4s2xf4tsskkw"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_1vyf0"]
+[ext_resource type="Script" path="res://player.gd" id="1_k06b4"]
+[ext_resource type="Script" path="res://gunControl.gd" id="3_i8wx2"]
+[ext_resource type="PackedScene" uid="uid://cmyjah8vgwigv" path="res://gun.tscn" id="4_w3aht"]
+[ext_resource type="Script" path="res://swordControl.gd" id="5_7mw7l"]
+[ext_resource type="PackedScene" uid="uid://db7etx2x7u6q3" path="res://sword.tscn" id="6_rcauh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2qoe4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qvos"]
+albedo_color = Color(1, 0.647059, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_baadv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aadr7"]
+albedo_color = Color(0.205117, 0.205117, 0.205117, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ddg6m"]
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_g3tf3"]
+
+[node name="level" type="Node3D"]
+script = ExtResource("1_1vyf0")
+
+[node name="ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.00577247)
+use_collision = true
+size = Vector3(22, 1, 22)
+
+[node name="player" type="CharacterBody3D" parent="."]
+script = ExtResource("1_k06b4")
+metadata/_edit_group_ = true
+
+[node name="body" type="MeshInstance3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_2qoe4")
+surface_material_override/0 = SubResource("StandardMaterial3D_6qvos")
+
+[node name="eyes" type="MeshInstance3D" parent="player/body"]
+transform = Transform3D(0.309835, 0, 0, 0, -9.78219e-09, 0.50049, 0, -0.22379, -2.18771e-08, 0.204275, 0.442909, -0.279475)
+mesh = SubResource("CylinderMesh_baadv")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_aadr7")
+
+[node name="eyes2" type="MeshInstance3D" parent="player/body"]
+transform = Transform3D(0.291831, 0, 0, 0, 8.38474e-09, 0.50049, 0, 0.19182, -2.18771e-08, -0.21654, 0.442909, -0.330795)
+mesh = SubResource("CylinderMesh_ddg6m")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_aadr7")
+
+[node name="Hand" type="Marker3D" parent="player/body"]
+transform = Transform3D(0.931976, 0, -0.362519, 0, 1, 0, 0.362519, 0, 0.931976, 0.529848, 0, -0.540933)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="player/body"]
+transform = Transform3D(0.217103, 0, 0, 0, 0.331098, 0, 0, 0, 0.838035, 0, 0.884703, 0)
+mesh = SubResource("TubeTrailMesh_g3tf3")
+
+[node name="gunControl" type="Node3D" parent="player"]
+script = ExtResource("3_i8wx2")
+starting_weapon = ExtResource("4_w3aht")
+
+[node name="swordControl" type="Node3D" parent="player"]
+script = ExtResource("5_7mw7l")
+starting_weapon = ExtResource("6_rcauh")
+
+[node name="Joint" type="Generic6DOFJoint3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.529465, 0.802012, -0.384069)
+node_a = NodePath("..")
+node_b = NodePath("..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 16, -16)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.550277, 0.834982, 0, -0.834982, 0.550277, 0, 10, 5.65614)

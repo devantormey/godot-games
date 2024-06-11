@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bq8je3y5t1u6t"]
+[gd_scene load_steps=13 format=3 uid="uid://bq8je3y5t1u6t"]
 
 [ext_resource type="Script" path="res://level2/player.gd" id="1_msg50"]
 [ext_resource type="Script" path="res://level1/swordControl.gd" id="2_52j6o"]
 [ext_resource type="PackedScene" uid="uid://db7etx2x7u6q3" path="res://level1/sword.tscn" id="3_ndwip"]
+[ext_resource type="Texture2D" uid="uid://b124cmhmiu2q7" path="res://level2/textures/WhiteTiles07_4K_AO.png" id="4_mr57x"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_r077f"]
 
@@ -17,13 +18,14 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_grro2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4dbgl"]
-size = Vector3(22, 1, 22)
+size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1qnyk"]
-size = Vector3(22, 1, 22)
+size = Vector3(100, 1, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwntp"]
-albedo_color = Color(0.158477, 0.286072, 0.127753, 1)
+albedo_color = Color(0.3, 0.3, 0.3, 0.984314)
+albedo_texture = ExtResource("4_mr57x")
 
 [node name="level2" type="Node3D"]
 
@@ -48,15 +50,15 @@ script = ExtResource("2_52j6o")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
 shape = SubResource("CapsuleShape3D_grro2")
 
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="player"]
+[node name="swordArm" type="Generic6DOFJoint3D" parent="player"]
 node_a = NodePath("..")
 node_b = NodePath("../sword")
 
 [node name="sword" parent="player" instance=ExtResource("3_ndwip")]
-transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, 0.7, -0.1, -0.6)
+transform = Transform3D(0.866025, 0.12941, -0.482963, -0.5, 0.224144, -0.836516, 0, 0.965926, 0.258819, 1, -0.1, -0.6)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 9, 7)
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 11, 6)
 
 [node name="ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.00577247)

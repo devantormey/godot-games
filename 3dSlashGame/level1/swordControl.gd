@@ -72,59 +72,31 @@ func setup_joint():
 	#joint.set_param_z(Generic6DOFJoint3D.PARAM_ANGULAR_SPRING_DAMPING, 0.5)
 	#joint.set_param_z(Generic6DOFJoint3D.PARAM_ANGULAR_SPRING_EQUILIBRIUM_POINT, 0.0)
 
-func swingSword(target_position: Vector3) -> void:
-	print("swing")
+#func swingSword(target_position: Vector3) -> void:
+	#print("swing")
+#
 	#if equipped_weapon:
 		#var hand_position = hand.global_transform.origin
 		#var direction = (target_position - hand_position).normalized()
 #
-		## Maintain the 45 degrees rotation along the Z-axis
-		#var base_rotation = Vector3(0, 0, 45)
-#
 		## Start anticipation (bringing the sword back)
-		#var start_rotation = equipped_weapon.rotation_degrees
-		#var anticipation_rotation = start_rotation + Vector3(0, -60, 0)  # Bringing the sword back further
+		#var anticipation_force = -direction * 20.0  # Adjust the magnitude as needed
+		#equipped_weapon.apply_central_impulse(anticipation_force)
+		#await get_tree().create_timer(0.1).timeout  # Anticipation duration
 #
-		## End of swing
-		#var end_rotation = start_rotation + Vector3(0, 90, 0)  # Ending angle
+		## Apply swing force
+		#var swing_force = direction * 50.0  # Adjust the magnitude as needed
+		#equipped_weapon.apply_central_impulse(swing_force)
+		#await get_tree().create_timer(0.08).timeout  # Swing duration
 #
-		## Ready position (neutral position)
-		#var ready_rotation = start_rotation
+		## Apply return to ready position force
+		#var ready_position = hand.global_transform.origin + direction * 1.0  # Adjust as needed
+		#var return_direction = (ready_position - equipped_weapon.global_transform.origin).normalized()
+		#var return_force = return_direction * 20.0  # Adjust the magnitude as needed
+		#equipped_weapon.apply_central_impulse(return_force)
+		#await get_tree().create_timer(0.1).timeout  # Return duration
 #
-		## Durations
-		#var anticipation_duration = 0.1
-		#var swing_duration = 0.08
-		#var return_duration = 0.1
+		## Optionally, add some damping or friction to stop the sword after the swing
+		#equipped_weapon.linear_damp = 2.0  # Adjust as needed
+		#equipped_weapon.angular_damp = 2.0  # Adjust as needed
 #
-		## Animate the anticipation phase
-		#var t = 0.0
-		#while t < anticipation_duration:
-			#t += get_process_delta_time()
-			#var interp = t / anticipation_duration
-			#equipped_weapon.rotation_degrees = lerp(start_rotation, anticipation_rotation, interp) + base_rotation
-			#await get_tree().create_timer(0.01).timeout
-		#
-		## Reset t for the swing phase
-		#t = 0.0
-		#var current_rotation = equipped_weapon.rotation_degrees
-#
-		## Animate the swing phase
-		#while t < swing_duration:
-			#t += get_process_delta_time()
-			#var interp = t / swing_duration
-			#equipped_weapon.rotation_degrees = lerp(current_rotation, end_rotation, interp) + base_rotation
-			#await get_tree().create_timer(0.01).timeout
-#
-		## Reset t for the return phase
-		#t = 0.0
-		#current_rotation = equipped_weapon.rotation_degrees
-#
-		## Animate the return to ready position phase
-		#while t < return_duration:
-			#t += get_process_delta_time()
-			#var interp = t / return_duration
-			#equipped_weapon.rotation_degrees = lerp(current_rotation, ready_rotation, interp) + base_rotation
-			#await get_tree().create_timer(0.01).timeout
-		#
-		## Reset to ready position
-		#equipped_weapon.rotation_degrees = ready_rotation + base_rotation

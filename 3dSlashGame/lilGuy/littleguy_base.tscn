@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cxrb13vwok8rt"]
 
-[ext_resource type="PackedScene" uid="uid://2cowv7hqojkv" path="res://lilGuy/littleguy_base.glb" id="1_8yb2v"]
+[ext_resource type="PackedScene" uid="uid://2cowv7hqojkv" path="res://littleguy_base.glb" id="1_8yb2v"]
 
 [node name="littleguy_base" instance=ExtResource("1_8yb2v")]
 

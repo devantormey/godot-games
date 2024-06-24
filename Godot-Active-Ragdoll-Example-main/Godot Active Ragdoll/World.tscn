@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8ovip13w7fqk"]
+
+[ext_resource type="PackedScene" uid="uid://qewq6evgcuf6" path="res://Ragdoll4.tscn" id="1"]
+
+[sub_resource type="BoxMesh" id="1"]
+
+[sub_resource type="BoxShape3D" id="3"]
+
+[sub_resource type="BoxMesh" id="4"]
+
+[sub_resource type="BoxShape3D" id="5"]
+
+[node name="World" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["CanGrab"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -0.258569, 0.0703154, 0.0799446)
+mesh = SubResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("3")
+
+[node name="StaticBody2" type="StaticBody3D" parent="." groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.93869, -8.03082)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody2"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -0.258569, 0.0703154, 0.0799446)
+mesh = SubResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody2"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("3")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.54093, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("5")
+
+[node name="RigidBody2" type="RigidBody3D" parent="." groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.33844, 2.54093, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody2"]
+mesh = SubResource("4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody2"]
+shape = SubResource("5")
+
+[node name="RigidBody3" type="RigidBody3D" parent="." groups=["CanGrab"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.98864, 2.54093, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3"]
+mesh = SubResource("4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3"]
+shape = SubResource("5")
+
+[node name="Ragdoll2" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61998, 1.99253)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.463018, 0.886349, 0, -0.886349, 0.463018, 4.22859, 5.64331, 0)
+light_energy = 0.5

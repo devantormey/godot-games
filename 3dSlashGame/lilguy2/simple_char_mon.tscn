@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://iltqkxkqh6qs"]
+
+[ext_resource type="PackedScene" uid="uid://bjirpxxnwamgw" path="res://lilguy2/simple_char_phys.tscn" id="1_temq1"]
+[ext_resource type="Script" path="res://lilguy2/follow_cam.gd" id="2_sidqm"]
+[ext_resource type="Texture2D" uid="uid://b124cmhmiu2q7" path="res://level2/textures/WhiteTiles07_4K_AO.png" id="2_x7g8l"]
+[ext_resource type="Script" path="res://lilguy2/Camera3D.gd" id="3_lnodg"]
+[ext_resource type="PackedScene" uid="uid://gvsgtrikw30v" path="res://lilguy2/bowling_ball.tscn" id="4_qr4ul"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_brrem"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xw6d"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_be1i0"]
+albedo_color = Color(0.654232, 0.654232, 0.654232, 0.984314)
+albedo_texture = ExtResource("2_x7g8l")
+
+[node name="SimpleCharMon" type="Node3D"]
+
+[node name="playerCharacter" parent="." instance=ExtResource("1_temq1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="playerCharacter"]
+transform = Transform3D(-1, -4.83721e-08, 4.02406e-08, -1.17008e-08, 0.771336, 0.636428, -6.18244e-08, 0.636428, -0.771336, 0, 3.824, -3.079)
+script = ExtResource("2_sidqm")
+
+[node name="ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.00577247)
+axis_lock_linear_y = true
+axis_lock_angular_y = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+shape = SubResource("BoxShape3D_brrem")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground"]
+mesh = SubResource("BoxMesh_0xw6d")
+surface_material_override/0 = SubResource("StandardMaterial3D_be1i0")
+
+[node name="wall" type="StaticBody3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, -4.37114e-08, -0.1, 0, -1, 4.37114e-09, 0, 4, 20.9942)
+axis_lock_linear_y = true
+axis_lock_angular_y = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall"]
+shape = SubResource("BoxShape3D_brrem")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wall"]
+mesh = SubResource("BoxMesh_0xw6d")
+surface_material_override/0 = SubResource("StandardMaterial3D_be1i0")
+
+[node name="wall2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, -0.707107, -0.0707107, 0, -0.707107, 0.0707107, 23, 4, 20.9942)
+axis_lock_linear_y = true
+axis_lock_angular_y = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall2"]
+shape = SubResource("BoxShape3D_brrem")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="wall2"]
+mesh = SubResource("BoxMesh_0xw6d")
+surface_material_override/0 = SubResource("StandardMaterial3D_be1i0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.991743, 0.128242, 0, -0.128242, 0.991743, 0.27737, 1.38037, 4.35387)
+visible = false
+script = ExtResource("3_lnodg")
+bullet_scene = ExtResource("4_qr4ul")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.46794, -1.89724)

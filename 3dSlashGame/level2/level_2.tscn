@@ -33,6 +33,7 @@ albedo_texture = ExtResource("4_mr57x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 axis_lock_angular_x = true
 axis_lock_angular_z = true
+mass = 1.43
 script = ExtResource("1_msg50")
 
 [node name="body" type="MeshInstance3D" parent="player"]
@@ -74,3 +75,19 @@ surface_material_override/0 = SubResource("StandardMaterial3D_bwntp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 14, 12)
+
+[node name="enemy" type="RigidBody3D" parent="."]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+
+[node name="body" type="MeshInstance3D" parent="enemy"]
+mesh = SubResource("CapsuleMesh_r077f")
+surface_material_override/0 = SubResource("StandardMaterial3D_g3y8m")
+
+[node name="eyes" type="MeshInstance3D" parent="enemy/body"]
+transform = Transform3D(0.648, 0, 0, 0, 0.3, 0, 0, 0, 0.2, 0, 0.3, -0.4)
+mesh = SubResource("BoxMesh_faglt")
+surface_material_override/0 = SubResource("StandardMaterial3D_ylnbm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemy"]
+shape = SubResource("CapsuleShape3D_grro2")

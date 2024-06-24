@@ -1,0 +1,9 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1719092459
+default_env.tres::Environment::-1::1719092451::0::1::::<><>::
+icon.png::CompressedTexture2D::6044057814717956080::1719092375::1719092460::1::::<><>::
+Material_001.material::StandardMaterial3D::-1::1719092375::0::1::::<><>::
+Ragdoll2.glb::PackedScene::3886233929519098715::1719092375::1719092460::1::::<><>::
+Ragdoll4.gd::GDScript::-1::1719092451::0::1::::<>Node3D<>::
+Ragdoll4.tscn::PackedScene::-1::1719092451::0::1::::<><>::res://Ragdoll2.glb<>res://Ragdoll4.gd
+World.tscn::PackedScene::-1::1719092451::0::1::::<><>::res://Ragdoll4.tscn<>res://icon.png

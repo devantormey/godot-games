@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://iltqkxkqh6qs"]
+
+[ext_resource type="PackedScene" uid="uid://bjirpxxnwamgw" path="res://lilguy2/simple_char_phys.tscn" id="1_temq1"]
+[ext_resource type="Texture2D" uid="uid://b124cmhmiu2q7" path="res://level2/textures/WhiteTiles07_4K_AO.png" id="2_x7g8l"]
+[ext_resource type="Script" path="res://lilguy2/Camera3D.gd" id="3_lnodg"]
+[ext_resource type="PackedScene" uid="uid://gvsgtrikw30v" path="res://lilguy2/bowling_ball.tscn" id="4_qr4ul"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_brrem"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xw6d"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_be1i0"]
+albedo_color = Color(0.654232, 0.654232, 0.654232, 0.984314)
+albedo_texture = ExtResource("2_x7g8l")
+
+[node name="SimpleCharMon" type="Node3D"]
+
+[node name="playerCharacter" parent="." instance=ExtResource("1_temq1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.564107, -0.446753, 0.829555)
+speed = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="playerCharacter"]
+transform = Transform3D(-1, -3.75079e-08, 5.09266e-08, 1.43934e-08, 0.649103, 0.760701, -6.15888e-08, 0.760701, -0.649103, 0.299999, 5.32391, -2.37855)
+
+[node name="ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.00577247)
+axis_lock_linear_y = true
+axis_lock_angular_y = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+shape = SubResource("BoxShape3D_brrem")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground"]
+mesh = SubResource("BoxMesh_0xw6d")
+surface_material_override/0 = SubResource("StandardMaterial3D_be1i0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.991743, 0.128242, 0, -0.128242, 0.991743, 0.27737, 1.38037, 4.35387)
+visible = false
+script = ExtResource("3_lnodg")
+bullet_scene = ExtResource("4_qr4ul")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.46794, -1.89724)

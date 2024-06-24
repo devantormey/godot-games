@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://chiq6fvkvp8po"
-path="res://.godot/imported/littleguy_justModel.fbx-d0c6334b57e6d41ed9e06434aa091d91.scn"
+uid="uid://5x3g22j3puil"
+path="res://.godot/imported/T-Pose.fbx-a7dd177eb7635507efa32c2c49e9e7b6.scn"
 
 [deps]
 
-source_file="res://lilGuy/littleguy_justModel.fbx"
-dest_files=["res://.godot/imported/littleguy_justModel.fbx-d0c6334b57e6d41ed9e06434aa091d91.scn"]
+source_file="res://lilguy2/T-Pose.fbx"
+dest_files=["res://.godot/imported/T-Pose.fbx-a7dd177eb7635507efa32c2c49e9e7b6.scn"]
 
 [params]
 
